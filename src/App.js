@@ -1,11 +1,22 @@
 import React from 'react';
-import {AppBar, Typography, IconButton, Container, Toolbar, Box, Paper, Grid, Card,
-    CardMedia, CardContent, CardActions,} from "@material-ui/core";
+import {
+    AppBar, Typography, IconButton, Container, Toolbar, Box, Paper, Grid, Card,
+    CardMedia, CardContent, CardActions,
+} from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
+import FolderIcon from '@material-ui/icons/Folder';
+import RestoreIcon from '@material-ui/icons/Restore';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+
+
 import LayerIcon from '@material-ui/icons/Layers';
 import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import Button from "@material-ui/core/es/Button/Button";
 import {makeStyles} from '@material-ui/core/styles';
+import BottomNavigation from "@material-ui/core/BottomNavigation";
+import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundPosition: "center"
     },
     overlay: {
-       position: "absolute",
+        position: "absolute",
         top: 0,
         bottom: 0,
         right: 0,
@@ -40,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(8)
     },
     cardMedia: {
-       paddingTop: "56.25%"
+        paddingTop: "56.25%"
     },
     cardContent: {
         flexGrow: 1
@@ -50,10 +61,15 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 
-const cards = [1,2,3,4,5,6,7,8,9];
+const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function App() {
     const classes = useStyles();
+    const [value, setValue] = React.useState("recents")
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
         <>
@@ -82,10 +98,10 @@ function App() {
                             <Grid item md={6}>
                                 <div className={classes.mainFeaturesPostContent}>
                                     <Typography
-                                    component="h1"
-                                    variant="h3"
-                                    color="inherit"
-                                    gutterBottom
+                                        component="h1"
+                                        variant="h3"
+                                        color="inherit"
+                                        gutterBottom
                                     >
                                         Web Dev Blog Kama
                                     </Typography>
@@ -95,8 +111,8 @@ function App() {
                                         color="inherit"
                                         paragraph
                                     >
-                                        Lor 25 words agnha  ahah ah aojnapori ghaogj
-                                         ahohap0hi phiagporhn ahpgjiahjah ahjia[-jh[ const ah
+                                        Lor 25 words agnha ahah ah aojnapori ghaogj
+                                        ahohap0hi phiagporhn ahpgjiahjah ahjia[-jh[ const ah
                                         ahiojaohjn aoihja ijaahi aija aijoiajoijija ahijphijh
                                     </Typography>
                                     <Button variant="contained" color="secondary">
@@ -108,27 +124,28 @@ function App() {
                     </Container>
                 </Paper>
                 <div className={classes.mainContent}>
-            <Container maxWidth="md">
-                <Typography variant="h2" align="center" color="textPrimary" gutterBottom>Web Dev Kamma</Typography>
-                <Typography variant="h5" align="center" color="textSecondary" paragraph>
-                    Lor 25 words agnha  ahah ah aojnapori ghaogj
-                    ahohap0hi phiagporhn ahpgjiahjah ahjia[-jh[ const ah
-                    ahiojaohjn aoihja ijaahi aija aijoiajoijija ahijphijh
-                    Lor 25 words agnha  ahah ah aojnapori ghaogj
-                    ahohap0hi phiagporhn ahpgjiahjah ahjia[-jh[ const ah
-                    ahiojaohjn aoihja ijaahi aija aijoiajoijija ahijphijh
-                    Dev Kamma</Typography>
-                <div className={classes.mainButtons}>
-                    <Grid container spacing={2} justify="center">
-                        <Grid item>
-                            <Button variant="contained" color="primary">Start Now</Button>
-                        </Grid>
-                        <Grid item>
-                            <Button variant="outlined" color="primary">Learn more</Button>
-                        </Grid>
-                    </Grid>
-                </div>
-            </Container>
+                    <Container maxWidth="md">
+                        <Typography variant="h2" align="center" color="textPrimary" gutterBottom>Web Dev
+                            Kamma</Typography>
+                        <Typography variant="h5" align="center" color="textSecondary" paragraph>
+                            Lor 25 words agnha ahah ah aojnapori ghaogj
+                            ahohap0hi phiagporhn ahpgjiahjah ahjia[-jh[ const ah
+                            ahiojaohjn aoihja ijaahi aija aijoiajoijija ahijphijh
+                            Lor 25 words agnha ahah ah aojnapori ghaogj
+                            ahohap0hi phiagporhn ahpgjiahjah ahjia[-jh[ const ah
+                            ahiojaohjn aoihja ijaahi aija aijoiajoijija ahijphijh
+                            Dev Kamma</Typography>
+                        <div className={classes.mainButtons}>
+                            <Grid container spacing={2} justify="center">
+                                <Grid item>
+                                    <Button variant="contained" color="primary">Start Now</Button>
+                                </Grid>
+                                <Grid item>
+                                    <Button variant="outlined" color="primary">Learn more</Button>
+                                </Grid>
+                            </Grid>
+                        </div>
+                    </Container>
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     <Grid container spacing={4}>
@@ -165,6 +182,39 @@ function App() {
                     </Grid>
                 </Container>
             </main>
+            <footer>
+                <Typography variant="h6" align="center" gutterBottom>Footer</Typography>
+                <BottomNavigation
+                    value={value}
+                    onChange={handleChange}
+                    className={classes.root}
+                >
+                    <BottomNavigationAction
+                        label="Recents"
+                        value="recentes"
+                        icon={<RestoreIcon/>}
+                    />
+                    <BottomNavigationAction
+                        label="Favorites"
+                        value="favorites"
+                        icon={<FavoriteIcon/>}
+                    />
+                    <BottomNavigationAction
+                        label="Nearby"
+                        value="nearby"
+                        icon={<LocationOnIcon/>}
+                    />
+                    <BottomNavigationAction
+                        label="Folder"
+                        value="folder"
+                        icon={<FolderIcon/>}
+                    />
+                </BottomNavigation>
+                <Typography align="center" color="textSecondary" component="p" variant="subtitle1">
+                    Web Dev Blog React JS Material Ui site
+                </Typography>
+
+            </footer>
 
         </>
     );
