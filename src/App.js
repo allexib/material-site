@@ -1,7 +1,7 @@
 import React from 'react';
 import {
     AppBar, Typography, IconButton, Container, Toolbar, Box, Paper, Grid, Card,
-    CardMedia, CardContent, CardActions,
+    CardMedia, CardContent, CardActions, DialogTitle, DialogContent, DialogContentText
 } from "@material-ui/core";
 import MenuIcon from '@material-ui/icons/Menu';
 import FolderIcon from '@material-ui/icons/Folder';
@@ -16,6 +16,10 @@ import Button from "@material-ui/core/es/Button/Button";
 import {makeStyles} from '@material-ui/core/styles';
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
+
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,6 +75,16 @@ function App() {
         setValue(newValue);
     };
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    }
+
+    const handleClose = () => {
+        setOpen(false);
+    }
+
     return (
         <>
             <AppBar position="fixed">
@@ -82,7 +96,35 @@ function App() {
                         </IconButton>
                         <Typography variant="h6" className={classes.title}>Web Dev Blog</Typography>
                         <Box mr={3}>
-                            <Button color="inherit" variant="outlined">Log in</Button>
+                            <Button color="inherit" variant="outlined" onClick={handleClickOpen}>Log in</Button>
+
+                            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+                                <DialogTitle if="form-dialog-title">Log in</DialogTitle>
+                                <DialogContent>
+                                    <DialogContentText>Log in to see videos</DialogContentText>
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="name"
+                                        label="Emeil Adress"
+                                        type="email"
+                                        fullWidth
+                                    />
+                                    <TextField
+                                        autoFocus
+                                        margin="dense"
+                                        id="pass"
+                                        label="Password"
+                                        type="password"
+                                        fullWidth
+                                    />
+                                </DialogContent>
+                                <DialogActions>
+                                    <Button onClick={handleClose} color="primary">Cancel</Button>
+                                    <Button onClick={handleClose} color="primary">Log in</Button>
+                                </DialogActions>
+                            </Dialog>
+
                         </Box>
                         <Button color="secondary" variant="contained">Sign Up</Button>
                     </Toolbar>
